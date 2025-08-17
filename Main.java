@@ -1,38 +1,42 @@
-package OOP.Example4;
+package OOP.Example5Car;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+
         int size = scan.nextInt();
-        if (size<0) {
-            System.out.println("ERROR");
-            return;
+        Car[] cars = new Car[size];
+
+        // Заполнение массива
+        for (int i = 0; i < size; i++) {
+            String brand = scan.next();
+            String owner = scan.next();
+            double volume = scan.nextDouble();
+            int year = scan.nextInt();
+
+            cars[i] = new Car(brand, owner, volume, year);
         }
-        scan.nextLine();
+        // Ввод номера автомобиля и нового объема
+        int carNumber = scan.nextInt() - 1; // преобразуем в индекс (отсчет с 0)
+        double newVolume = scan.nextDouble();
+        cars[carNumber].setVolume(newVolume);
 
-        Purchase[] purchases = new Purchase[size];
-        for (int i = 0; i<size; i++) {
-            String name= scan.next();
-            int price = scan.nextInt();
-            int quantity = scan.nextInt();
-            scan.nextLine();
-
-            Commodity commodity = new Commodity(name, price);
-            purchases[i] = new Purchase(commodity, quantity);
+        // Вывод массива
+        for (Car car : cars) {
+            System.out.println(car);
         }
 
-        int maxCost = 0;
-        for (Purchase purchase : purchases) {
-            if (purchase.getCost() > maxCost) {
-                maxCost = purchase.getCost();
+        System.out.println(); // Пустая строка
+
+        // Поиск самого нового автомобиля
+        Car newestCar = cars[0];
+        for (int i = 1; i < cars.length; i++) {
+            if (cars[i].getYearOfMade() > newestCar.getYearOfMade()) {
+                newestCar = cars[i];
             }
         }
-        for (Purchase purchase : purchases) {
-            if (purchase.getCost() == maxCost) {
-                System.out.println(purchase);
-            }
-        }
+        System.out.println(newestCar);
     }
 }
