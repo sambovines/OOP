@@ -1,18 +1,37 @@
-package OOP;
+package OOP.Example4;
 
 public class Purchase {
 
-    Commodity commodity;
-    int kol;
-
-    String nam;
-
-    private int getCost() {
-        return commodity.price*kol;
+    private Commodity commodity;
+    private int quantity;
+    public int getCost() {
+        return commodity.getPrice() * quantity;
     }
-    public void show() {
-        commodity.show();
-        System.out.println("Количество: "+kol);
-        System.out.println("Стоимость покупки: "+getCost());
+
+
+    public Purchase(Commodity commodity, int quantity) {
+        this.commodity = commodity;
+        this.quantity = quantity;
+    }
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return commodity.getName() + ";" + commodity.getPrice() + ";" + quantity + ";" + getCost();
     }
 }
